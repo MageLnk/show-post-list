@@ -1,28 +1,35 @@
 import React /*, { useContext } */ from "react";
+import PropTypes from "prop-types";
 //Los dos import de uso de variables en la App
 import { Context } from "../../../store/appContext";
 //import { GlobalState } from '../../../Contexts'
 //Importar acá la librería CSS (Como boostrap), o el propio CSS
 import "./home.css";
 //Importar acá los componentes que llame la app
+import Title from "../../home/title";
 
-const Home = props => {
+const Home = ({ match, history }) => {
   //const { value } = useContext(GlobalState);
+
   return (
     <Context.Consumer>
       {({ store, actions }) => {
         return (
           <div>
-            <p>
-              Bienvenido. Esta es tu plantilla definitiva. Contiene ContextApi para manejar toda la App, funciones
-              globales, variables, states y todo. Y además, tiene un nivel superior de state que viene desde el mismo
-              index, con el fin de usarse como un GlobalState específico.
-            </p>
+            <div>
+              <Title />
+            </div>
+            <div>
+              <span>Contenido</span>
+            </div>
           </div>
         );
       }}
     </Context.Consumer>
   );
 };
-
+Home.propTypes = {
+  match: PropTypes.any,
+  history: PropTypes.any,
+};
 export default Home;
