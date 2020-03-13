@@ -1,0 +1,29 @@
+import React from "react";
+import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
+
+export class Registro extends React.Component {
+	constructor(props) {
+		super(props);
+		this.actioncontext = null;
+		this.storecontext = null;
+		this.state = {
+			OlaKAseEnState: []
+		};
+	}
+	render() {
+		return (
+			<Context.Consumer>
+				{({ store, actions }) => {
+					this.actioncontext = actions;
+					this.storecontext= store;
+					return (
+						<div>
+							<button>Ola k ase</button>
+						</div>
+					);
+				}}
+			</Context.Consumer>
+		);
+	}
+}
