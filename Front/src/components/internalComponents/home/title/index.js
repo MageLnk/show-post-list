@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 //Los dos import de uso de variables en la App
 
 //Importar acá la librería CSS (Como boostrap), o el propio CSS
@@ -7,7 +6,7 @@ import { Grid, Typography } from "@material-ui/core";
 import titleStyle from "./style/index";
 //Importar acá los componentes que llame la app
 
-const Title = props => {
+const Title = () => {
   const styleTitle = titleStyle();
   return (
     <Grid className={styleTitle.container}>
@@ -20,7 +19,5 @@ const Title = props => {
     </Grid>
   );
 };
-
-Title.propTypes = {};
 
 export default Title;
