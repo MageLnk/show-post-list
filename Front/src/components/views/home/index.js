@@ -27,7 +27,7 @@ const Home = () => {
         actionsContext = actions;
         return (
           <Container className={styleHome.container}>
-            <Title />
+            <Title title={"HN Feed"} />
 
             {!store.data ? <Loading /> : <ListPosts />}
           </Container>

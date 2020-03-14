@@ -11,7 +11,7 @@ const getState = ({ getStore, setStore }) => {
       ],
     },
     actions: {
-      fetchPostList: params => {
+      fetchPostList: () => {
         fetch("https://hn.algolia.com/api/v1/search_by_date?query=nodejs").then(res => {
           res
             .json()
