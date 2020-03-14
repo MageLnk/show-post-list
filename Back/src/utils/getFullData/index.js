@@ -13,7 +13,7 @@ const loopRequestServer = callback => {
         callback(undefined, res);
       }
     });
-  }, 60000);
+  }, 6000);
 };
 
 loopRequestServer((error, { body }) => {
@@ -21,10 +21,13 @@ loopRequestServer((error, { body }) => {
     return console.log(error);
   }
 
-  Posts.find({}).then(posts => {
-    console.log(posts.hits);
+  Posts.find({}).then(resp => {
+    if (!resp) {
+      const posts = new Posts(body);
+      posts.save();
+    } else {
+      console.log("Evitando guardar info demás");
+      console.log(resp[0]._id);
+    }
   });
-
-  const posts = new Posts(body);
-  posts.save();
 });
