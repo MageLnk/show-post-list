@@ -19,7 +19,7 @@ const ListPosts = ({ history }) => {
       {({ store, actions }) => {
         return (
           <Grid>
-            <List component="nav">{mapTitles(store.exampleArray, styleContainerListPosts, history)}</List>
+            <List component="nav">{mapTitles(store.data, styleContainerListPosts, history)}</List>
           </Grid>
         );
       }}
