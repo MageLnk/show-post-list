@@ -3,9 +3,7 @@ import React from "react";
 import { ListItem, ListItemSecondaryAction, IconButton } from "@material-ui/core";
 import { FaTrashAlt } from "react-icons/fa";
 
-const mapTitles = (data, styles, history) => {
-  console.log(history);
-
+const mapTitles = (data, styles) => {
   // La función recibe 3 parámetros. La data, donde viene el array original. El styles, que
   // trae toda la información de como debe verse la data directo desde Material UI. Y finalmente
   // recibe "history", que es un objeto que viene de la vista que provee el router-dom. De forma que
@@ -18,20 +16,24 @@ const mapTitles = (data, styles, history) => {
     }
   });
 
+  const handleClickListItem = () => {
+    window.open("/story");
+  };
+
   const resultMap = filterEmpty.map((info, index) => {
-    //console.log("Mapeo", info);
+    console.log("Mapeo", info);
 
     return (
       <ListItem
         key={index}
         onClick={e => {
-          history.push("/story");
-          console.log("Acá debería hacer el push");
+          handleClickListItem();
         }}
         button
         className={styles.row}
       >
         {!info.story_title ? info.title : info.story_title}
+        <span className={styles.author}>&nbsp;- {info.author} - </span>
         <ListItemSecondaryAction>
           <span className={styles.date}>{info.created_at}</span>
           <IconButton

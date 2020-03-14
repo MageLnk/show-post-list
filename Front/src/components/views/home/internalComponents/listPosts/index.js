@@ -1,6 +1,4 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
-
 //Los import de uso de variables en la App
 import { Context } from "../../../../../store/appContext";
 
@@ -13,8 +11,6 @@ import { Grid, List } from "@material-ui/core";
 import mapTitles from "../../../../../utils/titleListMap";
 
 const ListPosts = () => {
-  const history = useHistory();
-
   const styleContainerListPosts = ListPostsContainerStyle();
 
   return (
@@ -22,7 +18,7 @@ const ListPosts = () => {
       {({ store, actions }) => {
         return (
           <Grid>
-            <List component="nav">{mapTitles(store.data, styleContainerListPosts, history)}</List>
+            <List component="nav">{mapTitles(store.data, styleContainerListPosts)}</List>
           </Grid>
         );
       }}

@@ -18,8 +18,8 @@ export default makeStyles({
   date: {
     paddingRight: "4rem",
   },
-  link: {
-    color: "currentColor",
-    textDecoration: "none",
+  author: {
+    color: "grey",
+    paddingLeft: "0.5rem",
   },
 });
