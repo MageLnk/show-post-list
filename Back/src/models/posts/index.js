@@ -5,10 +5,6 @@ const Posts = mongoose.model("Posts", {
     type: Array,
     require: true,
   },
-  page: {
-    type: Number,
-    require,
-  },
 });
 
 module.exports = Posts;

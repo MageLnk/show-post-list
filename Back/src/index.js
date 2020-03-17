@@ -2,7 +2,10 @@ const express = require("express");
 // Import conexion to DB
 require("./db/moongose");
 // Import Api conexion
-require("./utils/getFullData");
+
+// Import Utils
+require("./utils/compareServer");
+//require("./utils/checkServer");
 // Import models
 
 // Server Up
@@ -11,3 +14,8 @@ const port = process.env.PORT || 3010;
 // Server Json Up
 app.use(express.json());
 // Apis
+
+//
+app.listen(port, () => {
+  console.log("Server up on port ", port);
+});
