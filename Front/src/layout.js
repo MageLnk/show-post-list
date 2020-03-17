@@ -15,7 +15,7 @@ const Layout = props => {
     <div>
       <BrowserRouter basename={basename}>
         <Switch>
-          <Route exact path="/story" component={Story} />
+          <Route exact path="/story/:created_at_i/" component={Story} />
           <Route exact path="/" component={Home} />
           <Route render={() => <h1>Error 404!</h1>} />
         </Switch>

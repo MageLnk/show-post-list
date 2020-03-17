@@ -1,6 +1,7 @@
 const getState = ({ getStore, setStore }) => {
   return {
     store: {
+      data: [],
       exampleArray: [
         { title: "Ola", story_title: null },
         { title: "Ola 2", story_title: "Ola k ase" },
@@ -12,7 +13,11 @@ const getState = ({ getStore, setStore }) => {
     },
     actions: {
       fetchPostList: () => {
-        fetch("https://hn.algolia.com/api/v1/search_by_date?query=nodejs").then(res => {
+        fetch("http://localhost:3010/posts").then(res => {
+          if (res.status === 500) {
+            alert("El servicio no se encuentra disponible. Sentimos las molestias");
+            setStore({ error: res.status });
+          }
           res
             .json()
             .then(data => {
@@ -21,9 +26,23 @@ const getState = ({ getStore, setStore }) => {
               });
             })
             .catch(e => {
-              console.log("Error fetch");
+              //console.log("Error fetch");
             });
         });
+      },
+      deleteData: SelectInfo => {
+        console.log(SelectInfo);
+      },
+      returnDataAuthor: match => {
+        const store = getStore();
+        // eslint-disable-next-line
+        const infoToReturn = store.data.filter(data => {
+          if (match === data.created_at_i.toString()) {
+            return data;
+          }
+        });
+
+        return infoToReturn;
       },
     },
   };

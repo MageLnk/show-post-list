@@ -18,7 +18,7 @@ const ListPosts = () => {
       {({ store, actions }) => {
         return (
           <Grid>
-            <List component="nav">{mapTitles(store.data, styleContainerListPosts)}</List>
+            <List component="nav">{mapTitles(store.data, styleContainerListPosts, actions)}</List>
           </Grid>
         );
       }}

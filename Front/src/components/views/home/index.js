@@ -14,7 +14,7 @@ let storeContext = null;
 
 const Home = () => {
   useEffect(() => {
-    if (!storeContext.data) {
+    if (storeContext.data.length === 0) {
       actionsContext.fetchPostList();
     }
   }, []);
@@ -29,7 +29,7 @@ const Home = () => {
           <Container className={styleHome.container}>
             <Title title={"HN Feed"} />
 
-            {!store.data ? <Loading /> : <ListPosts />}
+            {store.data.length === 0 ? <Loading /> : <ListPosts />}
           </Container>
         );
       }}

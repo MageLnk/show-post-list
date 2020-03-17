@@ -17,5 +17,5 @@ Posts.find({})
     }
   })
   .catch(e => {
-    console.log(e);
+    console.log("The service not will working because the main API is down");
   });

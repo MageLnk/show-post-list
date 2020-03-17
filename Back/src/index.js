@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 // Import conexion to DB
 require("./db/moongose");
 // Import Api conexion
@@ -12,34 +13,43 @@ const PostsDeteled = require("./models/postsDeleted");
 // Server Up
 const app = express();
 const port = process.env.PORT || 3010;
-// Server Json Up
+// Server Json Up and Cors
 app.use(express.json());
+app.use(cors());
 // Apis
 
 app.get("/posts", (req, res) => {
   Posts.find({}).then(posts => {
+    if (posts.length === 0) {
+      res.status(500).send("Server down");
+      return;
+    }
+
     PostsDeteled.find({})
       .then(deleted => {
         const postsFix = JSON.stringify(posts);
         const deletedFix = JSON.stringify(deleted);
         const postsObj = JSON.parse(postsFix);
         const deletedObj = JSON.parse(deletedFix);
-        const ArrayFiltered = postsObj[0].hits.filter(originalPosts => {
-          if (deletedObj[0].hits.length === 0) {
-            return originalPosts;
-          }
-          if (deletedObj[0].hits[0].created_at_i === originalPosts.created_at_i) {
-            deletedObj[0].hits.shift();
-          } else {
-            deletedObj[0].hits.shift();
-            return originalPosts;
-          }
-        });
-        res.status(200).send(ArrayFiltered);
+
+        if (deletedObj.length === 0) {
+          res.status(200).send(postsObj[0].hits);
+        } else {
+          const arrayFiltered = postsObj[0].hits.filter(originalPosts => {
+            const match = deletedObj[0].hits.find(element => {
+              if (element.created_at_i === originalPosts.created_at_i) {
+                return element.created_at_i;
+              }
+            });
+            if (!match) {
+              return originalPosts;
+            }
+          });
+          res.status(200).send(arrayFiltered);
+        }
       })
       .catch(e => {
-        console.log(e);
-
+        //console.log(e);
         res.status(500).send();
       });
   });
@@ -76,6 +86,7 @@ app.post("/posts", (req, res) => {
           res.status(201).send(postsDeleted);
         })
         .catch(e => {
+          //console.log(e);
           res.status(400).send(e);
         });
     }

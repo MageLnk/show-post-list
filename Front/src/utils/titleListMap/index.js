@@ -4,32 +4,26 @@ import React from "react";
 import { ListItem, ListItemSecondaryAction, IconButton } from "@material-ui/core";
 import { FaTrashAlt } from "react-icons/fa";
 
-const mapTitles = (data, styles) => {
+const mapTitles = (data, styles, actions) => {
   const moment = require("moment");
-  // La función recibe 3 parámetros. La data, donde viene el array original. El styles, que
-  // trae toda la información de como debe verse la data directo desde Material UI. Y finalmente
-  // recibe "history", que es un objeto que viene de la vista que provee el router-dom. De forma que
-  // puedo cambiar a la página que corresponde al hacer click
 
   // eslint-disable-next-line
-  const filterEmpty = data.hits.filter(data => {
+  const filterEmpty = data.filter(data => {
     if (data.story_title || data.title) {
       return data;
     }
   });
 
-  const handleClickListItem = () => {
-    window.open("/story");
+  const handleClickListItem = params => {
+    window.open(`/story/${params}`);
   };
 
   const resultMap = filterEmpty.map((info, index) => {
-    //console.log("Mapeo", info);
-
     return (
       <ListItem
         key={index}
         onClick={e => {
-          handleClickListItem();
+          handleClickListItem(info.created_at_i);
         }}
         button
         className={styles.row}
@@ -40,7 +34,7 @@ const mapTitles = (data, styles) => {
           <span className={styles.date}>{moment(info.created_at).fromNow()}</span>
           <IconButton
             onClick={e => {
-              console.log("Ha sido eliminado con éxito");
+              actions.deleteData(info);
             }}
           >
             <FaTrashAlt size="1rem" />
