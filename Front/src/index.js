@@ -6,7 +6,6 @@ import Layout from "./layout";
 import "./index.css";
 
 const AppFinal = () => {
-  //const [data, setData] = useState([]);
   return <Layout />;
 };
 
