@@ -1,7 +1,6 @@
 import React from "react";
 //Los import de uso de variables en la App
 import { Context } from "../../../../../store/appContext";
-
 //Importar acá la librería CSS (Como boostrap), o el propio CSS
 import ListPostsContainerStyle from "./style";
 import { Grid, List } from "@material-ui/core";
@@ -17,7 +16,7 @@ const ListPosts = () => {
     <Context.Consumer>
       {({ store, actions }) => {
         return (
-          <Grid>
+          <Grid className={styleContainerListPosts.main}>
             <List component="nav">{mapTitles(store.data, styleContainerListPosts, actions)}</List>
           </Grid>
         );

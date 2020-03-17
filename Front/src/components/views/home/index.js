@@ -10,7 +10,7 @@ import ListPosts from "./internalComponents/listPosts";
 import Loading from "./internalComponents/loading";
 
 let actionsContext = null;
-let storeContext = null;
+let storeContext = "";
 
 const Home = () => {
   useEffect(() => {
@@ -26,7 +26,7 @@ const Home = () => {
         storeContext = store;
         actionsContext = actions;
         return (
-          <Container className={styleHome.container}>
+          <Container disableGutters className={styleHome.container}>
             <Title title={"HN Feed"} />
 
             {store.data.length === 0 ? <Loading /> : <ListPosts />}

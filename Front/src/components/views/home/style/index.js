@@ -4,5 +4,6 @@ export default makeStyles({
   container: {
     margin: 0,
     padding: 0,
+    maxWidth: "100%",
   },
 });

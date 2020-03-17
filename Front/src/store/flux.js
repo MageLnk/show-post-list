@@ -1,15 +1,7 @@
-const getState = ({ getStore, setStore }) => {
+const getState = ({ getStore, setStore, getActions }) => {
   return {
     store: {
       data: [],
-      exampleArray: [
-        { title: "Ola", story_title: null },
-        { title: "Ola 2", story_title: "Ola k ase" },
-        { title: null, story_title: "Ola k ase" },
-        { title: "Ola 4", story_title: "Ola k ase" },
-        { title: null, story_title: null },
-        { title: "Ola 6", story_title: "Ola k ase" },
-      ],
     },
     actions: {
       fetchPostList: () => {
@@ -30,8 +22,27 @@ const getState = ({ getStore, setStore }) => {
             });
         });
       },
-      deleteData: SelectInfo => {
-        console.log(SelectInfo);
+      deleteData: selectInfo => {
+        const actions = getActions();
+        const sendInfo = { hits: [selectInfo] };
+        fetch("http://localhost:3010/posts", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(sendInfo),
+        }).then(resp => {
+          resp
+            .json()
+            .then(res => {
+              //console.log("res", res);
+            })
+            .catch(e => {
+              //console.log(e);
+            });
+        });
+        actions.fetchPostList();
       },
       returnDataAuthor: match => {
         const store = getStore();

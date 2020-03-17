@@ -1,6 +1,10 @@
 import { makeStyles } from "@material-ui/styles";
 
 export default makeStyles({
+  main: {
+    paddingLeft: "2rem",
+    paddingRight: "1rem",
+  },
   container: {
     background: "black",
     margin: 0,
@@ -10,8 +14,7 @@ export default makeStyles({
     paddingLeft: "2rem",
   },
   row: {
-    marginLeft: "1rem",
-    paddingLeft: "1rem",
+    paddingLeft: "1.5rem",
     borderBottom: "solid 1px #d3d3d3",
     fontWeight: "bold",
   },

@@ -9,7 +9,7 @@ const Loading = () => {
   const styleLoading = loadingStyle();
   return (
     <Context.Consumer>
-      {({ store, actions }) => {
+      {({ store }) => {
         return (
           <div className={styleLoading.container}>
             <span className={styleLoading.loading}>{store.error ? "Server down" : "Loading..."}</span>
