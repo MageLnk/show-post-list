@@ -2,11 +2,18 @@
 const Posts = require("../../models/posts");
 // Import Utils
 const writeRecentData = require("../modifyData/writeRecentData");
+const requestDataToOriginServer = require("../requestDataToOriginServer");
+
+const writeDataFromZero = callback => {
+  requestDataToOriginServer(callback);
+};
 
 Posts.find({})
   .then(resp => {
     if (resp.length === 0) {
-      writeRecentData((error, { body }));
+      writeDataFromZero((error, { body }) => {
+        writeRecentData((error, { body }));
+      });
     }
   })
   .catch(e => {

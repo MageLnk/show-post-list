@@ -5,7 +5,7 @@ require("./db/moongose");
 
 // Import Utils
 require("./utils/compareServer");
-//require("./utils/checkServer");
+require("./utils/startCheckServer");
 // Import models
 
 // Server Up

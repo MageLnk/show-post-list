@@ -3,6 +3,7 @@ const Posts = require("../../models/posts");
 // Import Utils
 const writeRecentData = require("../modifyData/writeRecentData");
 const requestDataToOriginServer = require("../requestDataToOriginServer");
+const deleteAllData = require("../modifyData/deleteData");
 
 const loopRequestServer = callback => {
   setInterval(() => {
@@ -14,10 +15,6 @@ loopRequestServer((error, { body }) => {
   if (error) {
     return console.log(error);
   }
-  Posts.deleteOne({})
-    .then(() => {})
-    .catch(e => {
-      console.log(e);
-    });
+  deleteAllData();
   writeRecentData(body);
 });
