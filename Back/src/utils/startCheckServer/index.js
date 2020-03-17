@@ -12,7 +12,7 @@ Posts.find({})
   .then(resp => {
     if (resp.length === 0) {
       writeDataFromZero((error, { body }) => {
-        writeRecentData((error, { body }));
+        writeRecentData(body);
       });
     }
   })
